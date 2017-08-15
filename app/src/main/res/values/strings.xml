@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Bits and Pizzas</string>
+    <string name="create_order">Create Order</string>
+    <string name="create_order_title">Create Order</string>
+    <string name="action_settings">Settings</string>
+    <string name="order_activity">Order Activity</string>
+    <string name="action_share">Share</string>
+    <string name="title_top">Top fragment</string>
+    <string-array name="pizzas">
+        <item>Diavolo</item>
+        <item>Fungi</item>
+    </string-array>
+    <string-array name="pasta">
+        <item>Spaghetti Bolognese</item>
+        <item>Lasagne</item>
+    </string-array>
+    <string-array name="stores">
+        <item>Cambridge</item>
+        <item>Sebastopol</item>
+    </string-array>
+
+    <string-array name="titles">
+        <item>Home</item>
+        <item>Pizzas</item>
+        <item>Pasta</item>
+        <item>Stores</item>
+    </string-array>
+
+    <string name="open_drawer">Open drawer</string>
+    <string name="close_drawer">Close drawer</string>
+</resources>
