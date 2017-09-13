@@ -58,11 +58,12 @@ public class MainActivity extends Activity {
         drawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_activated_1, titles));
         //Добавить новый экземпляр OnItemClickListener к списковому представлению выдвижной панели
         drawerList.setOnItemClickListener(new DrawerItemClickListener());
-        //При исходном создании MainActivity использовать selectItem()
-        // для отображения TopFragment
-        if (savedInstanceState == null) {
-            selectItem(0);
-        }
+
+//        //При исходном создании MainActivity использовать selectItem()
+//        // для отображения TopFragment
+//        if (savedInstanceState == null) {
+//            selectItem(0);
+//        }
 
         //Если активность была уничтoжена и создается заново,
         // взять  значение currentPosition из предыдущего состояния активности
@@ -114,7 +115,11 @@ public class MainActivity extends Activity {
                             currentPosition = 0;
                         }
 
-                        if (fragment instanceof PizzaFragment) {
+//                        if (fragment instanceof PizzaFragment) {
+//                            currentPosition = 1;
+//                        }
+
+                        if (fragment instanceof PizzaMaterialFragment) {
                             currentPosition = 1;
                         }
 
@@ -145,8 +150,11 @@ public class MainActivity extends Activity {
         currentPosition = position;
         Fragment fragment;
         switch (position) {
+//            case 1:
+//                fragment = new PizzaFragment();
+//                break;
             case 1:
-                fragment = new PizzaFragment();
+                fragment = new PizzaMaterialFragment();
                 break;
             case 2:
                 fragment = new PastaFragment();
