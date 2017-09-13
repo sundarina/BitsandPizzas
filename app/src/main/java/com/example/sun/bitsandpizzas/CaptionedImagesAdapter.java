@@ -1,7 +1,5 @@
 package com.example.sun.bitsandpizzas;
 
-import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -30,6 +28,22 @@ public class CaptionedImagesAdapter extends RecyclerView.Adapter<CaptionedImages
 
     private String[] captions;
     private int[] imageIds;
+    private Listener listener;
+
+    /**При щелчке на любой из карточек в RecyclerView будет вызываться метод
+     onClick() интерфейса Listener. Затем в PizzaMaterialFragment добавляется
+     код реализации интерфейса; это позволит фрагменту отреагировать на щелчки
+     и запустить активность
+     1 Пользователь щелкает на карточке в RecyclerView.
+     2 Вызывается метод onClick() интерфейса Listener.
+     3  Mетод onClick() реализован в PizzaMaterialFragment.
+     Код фрагмента запускает PizzaDetailActivity.
+     */
+
+    public static interface  Listener{
+        public void onClick(int position);
+    }
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -60,26 +74,46 @@ public class CaptionedImagesAdapter extends RecyclerView.Adapter<CaptionedImages
         this.imageIds = imageIds;
     }
 
+    public void setListener(Listener listener){
+        //Активности и фрагменты используют этот метод для регистрации себя в качестве слушателя
+        this.listener = listener;
+    }
+
     //Создание нового представления
     @Override
-    public CaptionedImagesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //какой макет должен истользоваться для ViewHolder
-        CardView cv = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.card_captioned_image, parent, false);
+        CardView cv = (CardView) LayoutInflater.from(parent.getContext()).
+                inflate(R.layout.card_captioned_image, parent, false);
         return new ViewHolder(cv);
     }
 
     //Заполнение заданного представления данными
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         //Изображение выводится в графическом представлении ImageView.
         CardView cardView = holder.cardView;
         ImageView imageView = (ImageView) cardView.findViewById(R.id.info_image);
-        Drawable drawable = cardView.getResources().getDrawable(imageIds[position]); // deprecated
-       //  Drawable drawable = ContextCompat.getDrawable(getActivity(), imageIds[position]);
-        imageView.setImageDrawable(drawable);
+       // Drawable drawable = cardView.getResources().getDrawable(imageIds[position]); // deprecated
+        //imageView.setImageDrawable(drawable);
+
+        //  Drawable drawable = ContextCompat.getDrawable(getActivity(), imageIds[position]);
+
+        imageView.setImageDrawable(cardView.getResources().getDrawable(imageIds[position]));
         imageView.setContentDescription(captions[position]);
+
         TextView textView = (TextView) cardView.findViewById(R.id.info_text);
         textView.setText(captions[position]);
+
+        cardView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                if (listener != null){
+                    //При щелчке на CardView вызвать метод onClick() интерфейса Listener.
+                    listener.onClick(position);
+                }
+            }
+        });
     }
 
 

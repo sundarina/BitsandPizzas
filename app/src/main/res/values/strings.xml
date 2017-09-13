@@ -3,7 +3,7 @@
     <string name="create_order">Create Order</string>
     <string name="create_order_title">Create Order</string>
     <string name="action_settings">Settings</string>
-    <string name="order_activity">Order Activity</string>
+    <string name="order_activity">OrderActivity</string>
     <string name="action_share">Share</string>
     <string name="title_top">Top fragment</string>
     <string-array name="pizzas">
@@ -29,6 +29,6 @@
     <string name="open_drawer">Open drawer</string>
     <string name="close_drawer">Close drawer</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_pizza_detail">PizzaDetailActivity</string>
+    <string name="welcome_text">We offer a range of freshly baked pizza and pasta dishes. Why not try some?</string>
 </resources>

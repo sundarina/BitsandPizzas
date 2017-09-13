@@ -1,4 +1,6 @@
 package com.example.sun.bitsandpizzas;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -29,7 +31,7 @@ public class PizzaMaterialFragment extends Fragment {
 
         int[] pizzaImages = new int[Pizza.pizzas.length];
         for (int i = 0; i < pizzaImages.length; i++) {
-            pizzaImages[i] = Pizza.pizzas[i].getImageResourseId();
+            pizzaImages[i] = Pizza.pizzas[i].getImageResourceId();
         }
 
         CaptionedImagesAdapter adapter = new CaptionedImagesAdapter(pizzaNames, pizzaImages);
@@ -37,6 +39,20 @@ public class PizzaMaterialFragment extends Fragment {
         //чтобы карточка отображалась в линейном списке
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         pizzaRecycler.setLayoutManager(layoutManager);
+
+        /**Реализация метода onClick()
+         интерфейса Listener запускает
+         активность PizzaDetailActivity,
+         передавая ей идентификатор пиццы, выбранной пользователем */
+
+        adapter.setListener(new CaptionedImagesAdapter.Listener() {
+            @Override
+            public void onClick(int position) {
+                Intent intent = new Intent(getActivity(), PizzaDetailActivity.class);
+                intent.putExtra(PizzaDetailActivity.EXTRA_PIZZANO, position);
+                getActivity().startActivity(intent);
+            }
+        });
         return pizzaRecycler;
     }
 }
